@@ -5,9 +5,40 @@ from constants import *
 #from twilio.rest import Client
 
 
-list_tables = ['janeiro','fevereiro','marco','abril']
-list_products = []
+class Node:
+   def __init__(self, product=None, value=None, next=None):
+        self.product = product
+        self.value = value
+        self.next = next
 
+   def __repr__(self):
+        return 'Produto:%s  | valor:%s ' % (self.product,self.value)
+
+#lista ligada 
+
+class list:
+
+    def __init__(self):
+        self.head = None
+
+    def __repr__(self):
+        return "[" + str(self.head) + "]"
+
+def insertList(list, new_product, new_product_value):
+
+
+    new_node = Node(new_product, new_product_value)
+
+    new_node.next = list.head
+
+    list.head = new_node
+
+#start linked list first node
+
+new_node = Node(None,None)
+list.head = new_node
+
+newProduct_list = list
 
 def Start():
 
@@ -47,20 +78,32 @@ def Start():
                      )
 
     elif initial_value == '2':
-        #1 -> Adicionar os produtos a lista
-        #2 -> criar um ficherio externo
-        #3 -> Adicionar os produtos a um ficheiro esterno
-        #4 -> perguntar se deseja adicionar mais alguma produto
+
         factor = False
 
         while factor == False:
-      
-            repeat_product_init = input('Deseja inserir mais algum produto (S/N): ')
+            
+            new_product = input('Introduza o nome do novo Produto\n')
+            product_value = input('\nIntroduza o valor do novo Produto\n')
+
+            insertList(newProduct_list, new_product, product_value)
+
+            repeat_product_init = input('\nDeseja inserir mais algum produto (S/N): ')
 
             if repeat_product_init == 'n' or repeat_product_init == 'N':
                 factor = True;
                 Start()
-
+    elif initial_value == '3':
+        
+        #Lista todos os produtos da lista ligada
+        print("-------------")
+        node = newProduct_list.head
+        while node:
+            if node.product != None:
+                print(node.product)
+                print(node.value)
+                print("-------------")
+                node = node.next
 Start()
 
 
