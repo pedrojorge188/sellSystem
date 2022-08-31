@@ -93,6 +93,7 @@ def Start():
             if repeat_product_init == 'n' or repeat_product_init == 'N':
                 factor = True;
                 Start()
+
     elif initial_value == '3':
         
         #Lista todos os produtos da lista ligada
