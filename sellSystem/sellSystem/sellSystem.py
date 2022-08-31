@@ -1,4 +1,5 @@
 
+from msilib.schema import File
 import os
 import pandas as pd
 from constants import *
@@ -88,6 +89,9 @@ def Start():
 
             insertList(newProduct_list, new_product, product_value)
 
+            with open("productSave.txt",'a') as file:
+                file.write(new_product+'\t'+product_value+'\n')
+
             repeat_product_init = input('\nDeseja inserir mais algum produto (S/N): ')
 
             if repeat_product_init == 'n' or repeat_product_init == 'N':
@@ -105,6 +109,9 @@ def Start():
                 print(node.value)
                 print("-------------")
                 node = node.next
+            elif node.product == None:
+                print("Sem produtos para listar!")
+                Start()
 Start()
 
 
