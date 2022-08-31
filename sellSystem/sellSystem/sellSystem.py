@@ -129,6 +129,9 @@ def Start():
             elif node.product == None:
                 print("Sem produtos para listar!")
                 Start()
+    
+    elif initial_value == '4':
+         exit()
 Start()
 
 
