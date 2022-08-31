@@ -1,6 +1,7 @@
 
 from msilib.schema import File
 import os
+from tkinter import INSERT
 import pandas as pd
 from constants import *
 #from twilio.rest import Client
@@ -35,14 +36,30 @@ def insertList(list, new_product, new_product_value):
     list.head = new_node
 
 #start linked list first node
-
 new_node = Node(None,None)
 list.head = new_node
-
 newProduct_list = list
 
-def Start():
+controller = False
 
+def restoreData():
+    with open('ProductSave.txt','r') as restore:
+        dataProduct = restore.readline()
+        dataValue = restore.readline()
+
+        if(dataProduct != ''):
+
+            insertList(newProduct_list,  dataProduct, dataValue)
+
+        while dataProduct != '':
+
+            dataProduct = restore.readline()
+            dataValue = restore.readline()
+            insertList(newProduct_list,  dataProduct, dataValue)
+
+restoreData()
+def Start():
+    
     initial_value = input("Welcome\n1->Deseja Analizar as tabelas\n2->Adicionar Produtos\n3->Listar Produtos da Loja\n4->Sair\n")
 
     if initial_value == '1':
@@ -90,7 +107,7 @@ def Start():
             insertList(newProduct_list, new_product, product_value)
 
             with open("productSave.txt",'a') as file:
-                file.write(new_product+'\t'+product_value+'\n')
+                file.write(new_product+'\n'+product_value+'\n')
 
             repeat_product_init = input('\nDeseja inserir mais algum produto (S/N): ')
 
